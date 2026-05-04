@@ -1,88 +1,55 @@
 
-  # 💜 Private Memory Sharing Website
+# Private Memory Sharing Website
 
-A private memory sharing space for **Sapna & Kalyan** - Since November 26, 2025.
+This project is a private digital space designed to preserve meaningful moments, reflections, and shared stories. It is built around the idea that bonds grow stronger when memories are captured, revisited, and celebrated.
 
-## 🎯 What is This?
+## Why This Project Exists
 
-This is a beautiful, secure web app for sharing memories and special moments between two people. Only you two can access it using private credentials.
+Modern conversations move fast, but important moments should not disappear. This app creates a calm and personal place where memories can be saved with context, emotion, and time.
 
-- **Figma Design**: [View on Figma](https://www.figma.com/design/qbzg50LcgBrY2EnLn5KjBs/Private-Memory-Sharing-Website)
-- **Tech Stack**: React + TypeScript + Tailwind CSS + Supabase + Vercel
-- **Status**: 🚀 Ready to deploy
+## What Is Inside
 
-## 📋 Quick Start
+- A private login flow for restricted access
+- A memory collection experience for writing and organizing moments
+- A visually rich interface with a dark gradient theme
+- Structured sections for memories, chats, quotes, timeline, and letters
+- A random memory view to revisit past highlights
 
-### 1. Install Dependencies
+## Tech Stack
+
+- React + TypeScript + Vite
+- Supabase for data storage
+
+## Local Development
+
+1. Install dependencies:
+
 ```bash
 npm install
 ```
 
-### 2. Set Up Environment
-Create `.env.local` with your Supabase credentials:
-```
+2. Configure environment variables in .env.local:
+
+```env
 VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-### 3. Run Locally
+3. Start the development server:
+
 ```bash
 npm run dev
 ```
-Visit `http://localhost:5173`
 
-**Test Credentials**:
-- Username: `sapna` or `kalyan`
-- Password: `sapna@kalyan26112025`
-
-## 🚀 Deploy to Vercel
-
-See [COMPLETE_SETUP.md](./COMPLETE_SETUP.md) for detailed deployment instructions.
-
-### Quick Deployment:
-1. Push to GitHub
-2. Connect to Vercel
-3. Add environment variables
-4. Deploy!
-
-Your live URL will be something like: `https://kal-ka-sapna.vercel.app`
-
-## ✨ Features
-
-- 🔐 Private login (no user registration)
-- 💾 Store memories with dates, descriptions, and images
-- 🎨 Beautiful responsive UI
-- 💜 Special date display (Nov 26, 2025)
-- 📱 Works on desktop and mobile
-- ⚡ Fast & secure
-
-## 📦 Build for Production
+## Build
 
 ```bash
 npm run build
 ```
 
-This creates an optimized production build in the `dist/` folder.
+The production output is generated in the dist directory.
 
-## 📚 Documentation
+## Project Theme
 
-- [COMPLETE_SETUP.md](./COMPLETE_SETUP.md) - Full setup and deployment guide
-- [SETUP_GUIDE.md](./SETUP_GUIDE.md) - Detailed Supabase configuration
-- [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment checklist
-
-## 🔒 Security
-
-- ✅ Private credentials only
-- ✅ No user registration allowed
-- ✅ Environment variables on Vercel
-- ✅ Secure HTTPS connection
-- ✅ RLS policies on database
-
-## 💜 Happy Memories!
-
-Enjoy creating and sharing your special moments together!
-
----
-
-*Built with ❤️ for a special someone*
+The interface is intentionally styled with a soft neon-purple atmosphere to feel intimate, reflective, and emotionally warm, reinforcing the core idea of preserving bonds through memories.
   
