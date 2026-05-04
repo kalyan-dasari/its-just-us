@@ -13,39 +13,11 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useMemories, type Memory } from "../hooks/useMemories";
+import { useSectionEntries, type ChatEntry, type LetterEntry, type QuoteEntry, type TimelineEntry } from "../hooks/useSectionEntries";
 import { MemoryCard } from "../components/MemoryCard";
 import { MemoryForm } from "../components/MemoryForm";
 
 type SectionKey = "hub" | "memories" | "chats" | "quotes" | "timeline" | "letters" | "random";
-
-type ChatEntry = {
-  id: string;
-  side: "Him" | "Her";
-  time: string;
-  text: string;
-};
-
-type QuoteEntry = {
-  id: string;
-  quote: string;
-  author: string;
-  category: string;
-};
-
-type TimelineEntry = {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  type: string;
-};
-
-type LetterEntry = {
-  id: string;
-  title: string;
-  openWhen: string;
-  content: string;
-};
 
 const sectionCards = [
   {
@@ -126,6 +98,7 @@ const inputStyle = {
 
 export const Home = () => {
   const { memories, loading, error, addMemory, deleteMemory } = useMemories();
+  const { chats, quotes, timeline, letters, addChat, addQuote, addTimelineEntry, addLetter } = useSectionEntries();
   const { handleLogout } = useAuth();
   const [activeSection, setActiveSection] = useState<SectionKey>("hub");
   const [showMemoryForm, setShowMemoryForm] = useState(false);
@@ -146,14 +119,6 @@ export const Home = () => {
   const [letterOpenWhen, setLetterOpenWhen] = useState("Open when you miss me");
   const [letterContent, setLetterContent] = useState("");
   const [randomMemoryId, setRandomMemoryId] = useState<string | null>(null);
-
-  const [chatEntries, setChatEntries] = useState<ChatEntry[]>([
-    { id: "chat-1", side: "Him", time: "11:11", text: "Him" },
-    { id: "chat-2", side: "Her", time: "11:11", text: "Her" },
-  ]);
-  const [quotes, setQuotes] = useState<QuoteEntry[]>([]);
-  const [timeline, setTimeline] = useState<TimelineEntry[]>([]);
-  const [letters, setLetters] = useState<LetterEntry[]>([]);
 
   const username = localStorage.getItem("username") || "sapna";
 
@@ -519,12 +484,9 @@ export const Home = () => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (!chatMessage.trim()) return;
-                    setChatEntries((items) => [
-                      ...items,
-                      { id: crypto.randomUUID(), side: chatSide, time: "11:11", text: chatMessage.trim() },
-                    ]);
+                    await addChat({ side: chatSide, time: "11:11", text: chatMessage.trim() });
                     setChatMessage("");
                     setShowChatForm(false);
                   }}
@@ -537,7 +499,7 @@ export const Home = () => {
           )}
 
           <div style={{ display: "grid", gap: "26px", maxWidth: "900px", margin: "0 auto" }}>
-            {chatEntries.map((entry) => (
+              {chats.map((entry) => (
               <div
                 key={entry.id}
                 style={{
@@ -604,12 +566,9 @@ export const Home = () => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (!quoteText.trim()) return;
-                    setQuotes((items) => [
-                      ...items,
-                      { id: crypto.randomUUID(), quote: quoteText.trim(), author: quoteAuthor.trim() || "Unknown", category: quoteCategory },
-                    ]);
+                    await addQuote({ quote: quoteText.trim(), author: quoteAuthor.trim() || "Unknown", category: quoteCategory });
                     setQuoteText("");
                     setQuoteAuthor("");
                     setShowQuoteForm(false);
@@ -682,12 +641,9 @@ export const Home = () => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (!eventTitle.trim()) return;
-                    setTimeline((items) => [
-                      ...items,
-                      { id: crypto.randomUUID(), title: eventTitle.trim(), description: eventDescription.trim(), date: eventDate, type: eventType },
-                    ]);
+                    await addTimelineEntry({ title: eventTitle.trim(), description: eventDescription.trim(), date: eventDate, type: eventType });
                     setEventTitle("");
                     setEventDescription("");
                     setShowTimelineForm(false);
@@ -755,12 +711,9 @@ export const Home = () => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (!letterTitle.trim()) return;
-                    setLetters((items) => [
-                      ...items,
-                      { id: crypto.randomUUID(), title: letterTitle.trim(), openWhen: letterOpenWhen, content: letterContent.trim() },
-                    ]);
+                    await addLetter({ title: letterTitle.trim(), openWhen: letterOpenWhen, content: letterContent.trim() });
                     setLetterTitle("");
                     setLetterContent("");
                     setShowLetterForm(false);

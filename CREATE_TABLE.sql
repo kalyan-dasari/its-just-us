@@ -10,7 +10,7 @@
 -- ============================================
 
 -- Create memories table
-CREATE TABLE memories (
+CREATE TABLE IF NOT EXISTS memories (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title VARCHAR NOT NULL,
   content TEXT NOT NULL,
@@ -20,14 +20,50 @@ CREATE TABLE memories (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
+-- Create section entries table for chats, quotes, timeline, and letters
+CREATE TABLE IF NOT EXISTS section_entries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  section TEXT NOT NULL,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
 -- Enable RLS (Row Level Security)
 ALTER TABLE memories ENABLE ROW LEVEL SECURITY;
 
+ALTER TABLE section_entries ENABLE ROW LEVEL SECURITY;
+
 -- Create policy to allow all operations (safe for private app)
-CREATE POLICY "Allow all operations" ON memories
-  FOR ALL
-  USING (true)
-  WITH CHECK (true);
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies
+    WHERE schemaname = 'public'
+      AND tablename = 'memories'
+      AND policyname = 'Allow all operations'
+  ) THEN
+    CREATE POLICY "Allow all operations" ON memories
+      FOR ALL
+      USING (true)
+      WITH CHECK (true);
+  END IF;
+END $$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies
+    WHERE schemaname = 'public'
+      AND tablename = 'section_entries'
+      AND policyname = 'Allow all operations on section entries'
+  ) THEN
+    CREATE POLICY "Allow all operations on section entries" ON section_entries
+      FOR ALL
+      USING (true)
+      WITH CHECK (true);
+  END IF;
+END $$;
 
 -- ============================================
 
