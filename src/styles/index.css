@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background: #0b0014;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Animation for loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Line clamp for text */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Purple gradient backgrounds */
+.bg-gradient-purple {
+  background: linear-gradient(to bottom right, #4a148c, #6a1b9a, #7b1fa2);
+}
+
+.bg-gradient-purple-dark {
+  background: linear-gradient(to bottom right, #4a148c, #6a1b9a);
+}
+
+.bg-gradient-pink-button {
+  background: linear-gradient(to right, #da2d93, #e91e63);
+}
+
+.bg-purple-950 {
+  background-color: #1a0033;
+}
+
+.bg-purple-900 {
+  background-color: #4a148c;
+}
+
+.bg-purple-800 {
+  background-color: #6a1b9a;
+}
+
+.bg-purple-700 {
+  background-color: #7b1fa2;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-purple-200 {
+  color: #e1bee7;
+}
+
+.text-purple-300 {
+  color: #ce93d8;
+}
+
+.text-pink-400 {
+  color: #ff1493;
+}
+
+.text-pink-500 {
+  color: #da2d93;
+}
+
+.border-purple-600 {
+  border-color: #8e24aa;
+}
+
+.border-purple-700 {
+  border-color: #7b1fa2;
+}
+
+.from-purple-900 {
+  --tw-gradient-from: #4a148c;
+  --tw-gradient-from-position: 0%;
+}
+
+.via-purple-800 {
+  --tw-gradient-via: #6a1b9a;
+  --tw-gradient-via-position: 50%;
+}
+
+.to-purple-700 {
+  --tw-gradient-to: #7b1fa2;
+  --tw-gradient-to-position: 100%;
+}
+
+.from-pink-500 {
+  --tw-gradient-from: #da2d93;
+  --tw-gradient-from-position: 0%;
+}
+
+.to-pink-600 {
+  --tw-gradient-to: #e91e63;
+  --tw-gradient-to-position: 100%;
+}
