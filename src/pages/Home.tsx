@@ -22,12 +22,12 @@ type SectionKey = "hub" | "memories" | "chats" | "quotes" | "timeline" | "letter
 const sectionCards = [
   {
     key: "memories" as SectionKey,
-    title: "Our Memories",
+    title: "Our Moments",
     icon: Heart,
     accent: "#ff2d8f",
     gradient: "linear-gradient(135deg, rgba(117, 24, 38, 0.95), rgba(107, 14, 61, 0.88))",
     border: "#ff2d8f",
-    text: "Memories we keep forever",
+    text: "Moments we keep forever",
   },
   {
     key: "chats" as SectionKey,
@@ -341,7 +341,7 @@ export const Home = () => {
             </button>
 
             <h2 style={{ margin: 0, color: "#f5c2ee", fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 800 }}>
-              Our Memories
+              Our Moments
             </h2>
 
             <button
@@ -432,7 +432,7 @@ export const Home = () => {
               }}
             >
               <Heart size={54} color="#ff3ba5" style={{ marginBottom: "14px" }} />
-              <div style={{ fontSize: "1.15rem", fontWeight: 600 }}>No memories yet. Create your first one!</div>
+              <div style={{ fontSize: "1.15rem", fontWeight: 600 }}>No moments yet. Create your first one!</div>
             </div>
           )}
         </div>
@@ -509,18 +509,17 @@ export const Home = () => {
               >
                 <div
                   style={{
-                    minWidth: "74px",
+                    maxWidth: "70%",
                     padding: "12px 14px",
                     borderRadius: "16px",
                     background: entry.side === "Him" ? "rgba(51, 90, 173, 0.82)" : "rgba(142, 42, 109, 0.82)",
                     color: "white",
                     border: entry.side === "Him" ? "1px solid rgba(67, 138, 255, 0.55)" : "1px solid rgba(255, 77, 177, 0.55)",
                     boxShadow: "0 10px 24px rgba(0,0,0,0.18)",
-                    textAlign: "center",
                   }}
                 >
-                  <div style={{ fontSize: "1rem", fontWeight: 700 }}>{entry.time}</div>
-                  <div style={{ fontSize: "0.82rem", opacity: 0.72, marginTop: "8px" }}>{entry.side}</div>
+                  <div style={{ fontSize: "0.9rem", lineHeight: 1.4 }}>{entry.text}</div>
+                  <div style={{ fontSize: "0.75rem", opacity: 0.7, marginTop: "6px", textAlign: "right" }}>{entry.time}</div>
                 </div>
               </div>
             ))}

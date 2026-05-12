@@ -82,10 +82,9 @@ export const MemoryCard = ({ memory }: MemoryCardProps) => {
             lineHeight: 1.6,
             marginBottom: "1rem",
             flex: 1,
-            display: "-webkit-box",
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
+            whiteSpace: "pre-wrap",
+            wordWrap: "break-word",
+            overflow: "auto",
           }}
         >
           {memory.content}
