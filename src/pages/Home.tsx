@@ -119,6 +119,7 @@ export const Home = () => {
   const [letterOpenWhen, setLetterOpenWhen] = useState("Open when you miss me");
   const [letterContent, setLetterContent] = useState("");
   const [randomMemoryId, setRandomMemoryId] = useState<string | null>(null);
+  const [expandedMemoryId, setExpandedMemoryId] = useState<string | null>(null);
 
   const username = localStorage.getItem("username") || "sapna";
 
@@ -391,14 +392,15 @@ export const Home = () => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 380px))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(350px, 350px))",
                 gap: "24px",
                 alignItems: "start",
+                justifyContent: "center",
               }}
             >
               {memories.map((memory) => (
                 <div key={memory.id} style={{ position: "relative" }}>
-                  <MemoryCard memory={memory} />
+                  <MemoryCard memory={memory} onViewFull={() => setExpandedMemoryId(memory.id)} />
                   <button
                     onClick={() => handleDeleteMemory(memory.id)}
                     style={{
@@ -434,6 +436,109 @@ export const Home = () => {
             >
               <Heart size={54} color="#ff3ba5" style={{ marginBottom: "14px" }} />
               <div style={{ fontSize: "1.15rem", fontWeight: 600 }}>No moments yet. Create your first one!</div>
+            </div>
+          )}
+
+          {/* Full Memory Modal */}
+          {expandedMemoryId && memories.find((m) => m.id === expandedMemoryId) && (
+            <div
+              onClick={() => setExpandedMemoryId(null)}
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(0, 0, 0, 0.7)",
+                backdropFilter: "blur(4px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 1000,
+                padding: "20px",
+              }}
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  background: "linear-gradient(135deg, rgba(23, 30, 100, 0.98), rgba(44, 31, 112, 0.96))",
+                  backdropFilter: "blur(20px)",
+                  borderRadius: "1.5rem",
+                  border: "1px solid rgba(80, 116, 255, 0.3)",
+                  boxShadow: "0 32px 64px rgba(0, 0, 0, 0.4)",
+                  maxWidth: "700px",
+                  width: "100%",
+                  maxHeight: "85vh",
+                  overflow: "auto",
+                  padding: "32px",
+                  color: "#cfd8ff",
+                }}
+              >
+                {(() => {
+                  const mem = memories.find((m) => m.id === expandedMemoryId);
+                  if (!mem) return null;
+
+                  const formatDate = (dateString: string) => {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    });
+                  };
+
+                  return (
+                    <div>
+                      {mem.imageUrl && (
+                        <img
+                          src={mem.imageUrl}
+                          alt={mem.title}
+                          style={{
+                            width: "100%",
+                            height: "280px",
+                            objectFit: "cover",
+                            borderRadius: "1rem",
+                            marginBottom: "24px",
+                          }}
+                        />
+                      )}
+                      <h2 style={{ fontSize: "2rem", fontWeight: 800, color: "#d8e5ff", marginBottom: "16px", margin: 0 }}>
+                        {mem.title}
+                      </h2>
+                      <div style={{ fontSize: "0.9rem", color: "#a88bd8", marginBottom: "24px" }}>
+                        {formatDate(mem.date)} • Added on {formatDate(mem.createdAt)}
+                      </div>
+                      <p
+                        style={{
+                          fontSize: "1.05rem",
+                          lineHeight: 1.8,
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          color: "#dfe7ff",
+                          marginBottom: "32px",
+                        }}
+                      >
+                        {mem.content}
+                      </p>
+                      <button
+                        onClick={() => setExpandedMemoryId(null)}
+                        style={{
+                          border: "none",
+                          background: "linear-gradient(90deg, #8b5cf6, #7c3aed)",
+                          color: "white",
+                          borderRadius: "12px",
+                          padding: "14px 28px",
+                          cursor: "pointer",
+                          fontSize: "1rem",
+                          fontWeight: 700,
+                        }}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  );
+                })()}
+              </div>
             </div>
           )}
         </div>
