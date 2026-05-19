@@ -391,7 +391,7 @@ export const Home = () => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 380px))",
                 gap: "24px",
                 alignItems: "start",
               }}
