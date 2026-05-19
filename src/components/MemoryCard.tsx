@@ -23,7 +23,6 @@ export const MemoryCard = ({ memory }: MemoryCardProps) => {
         borderRadius: "1.35rem",
         boxShadow: "0 18px 42px rgba(0, 0, 0, 0.24)",
         overflow: "hidden",
-        height: "100%",
         display: "flex",
         flexDirection: "column",
         border: "1px solid rgba(80, 116, 255, 0.22)",

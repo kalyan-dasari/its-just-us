@@ -391,8 +391,9 @@ export const Home = () => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-                gap: "22px",
+                gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+                gap: "24px",
+                alignItems: "start",
               }}
             >
               {memories.map((memory) => (
